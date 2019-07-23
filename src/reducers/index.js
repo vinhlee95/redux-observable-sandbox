@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {beerReducer} from './beer';
+import {beerReducer, beerSelectors} from './beer';
 
 const initialState = {
 	name: 'Lee'
@@ -21,3 +21,5 @@ export const rootReducer = combineReducers({
 	appReducer,
 	beerReducer
 });
+
+export {beerSelectors};

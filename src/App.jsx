@@ -1,18 +1,33 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
+import {beerSelectors} from './reducers';
+import {getBeer} from './epics';
 
-function App({app, beers}) {
-	console.log(beers);
+function App({loading, beers, dispatch}) {
+	const renderGetBeers = () => {
+		return (
+			<>
+				<p>No beers? Let's get it</p>
+				<button onClick={() => dispatch(getBeer())}>Order 🍺</button>
+			</>
+		);
+	};
+
 	return (
 		<div className="App">
-			<h1>Hello CodeSandbox</h1>
+			<h1>Let's go Epic with Observable 💪</h1>
+			{beers ? (
+				<p>There are currently ${beers.length} beers</p>
+			) : (
+				renderGetBeers()
+			)}
 		</div>
 	);
 }
 
 const mapStateToProps = state => ({
-	app: state.appReducer,
-	beers: state.beerReducer
+	loading: beerSelectors.getLoading(state.beerReducer),
+	beers: beerSelectors.getBeers(state.beerReducer)
 });
 
 export default connect(mapStateToProps)(App);

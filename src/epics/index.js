@@ -5,3 +5,5 @@ import {fetchBeersEpic} from './fetchBeers';
 const rootEpic = combineEpics(fetchBeersEpic);
 
 export {rootEpic};
+
+export * from './fetchBeers';

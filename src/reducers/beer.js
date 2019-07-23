@@ -1,6 +1,6 @@
 const initialState = {
 	data: null,
-	loading: true
+	loading: 'idle'
 };
 
 export const beerReducer = (state = initialState, action) => {
@@ -8,11 +8,12 @@ export const beerReducer = (state = initialState, action) => {
 		case 'GET_BEER_SUCCESS':
 			return {
 				...state,
-				loading: false,
+				loading: 'success',
 				data: action.payload
 			};
 
 		case 'SET_STATUS':
+			console.log('Setting status', action.status);
 			return {
 				...state,
 				loading: action.status
@@ -21,4 +22,9 @@ export const beerReducer = (state = initialState, action) => {
 		default:
 			return state;
 	}
+};
+
+export const beerSelectors = {
+	getBeers: (state = initialState) => state.data,
+	getLoading: (state = initialState) => state.loading
 };
